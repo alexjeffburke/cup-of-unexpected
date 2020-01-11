@@ -1,2 +1,2 @@
 coverage
-test/expect.js
+test/compat/*.js

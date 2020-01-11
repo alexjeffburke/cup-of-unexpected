@@ -1,5 +1,5 @@
 var unexpected = require('unexpected');
-var expect = require('../');
+var expect = require('../../');
 
 expect.unexpected.output.preferredWidth = 100;
 
@@ -29,7 +29,7 @@ var nameSupported;
  * Tests.
  */
 
-describe('expect', function () {
+describe('compat/expect.js', function () {
 
   it('should have .version', function () {
     expect(expect.version).to.match(/^\d+\.\d+\.\d+$/);

@@ -12,5 +12,5 @@ indent_style = tab
 [*.{json,yml}]
 indent_size = 2
 
-[test/expect.js]
+[test/**/*.js]
 indent_size = 2

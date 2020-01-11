@@ -106,7 +106,7 @@ describe('compat/chai', function () {
 
     err(function(){
       expect(undefined).to.equal(null);
-    }, "expected undefined to equal null")
+    }, "expected undefined to be null") // Used to be: expected undefined to equal null
   });
 
   it('typeof', function(){

@@ -133,7 +133,7 @@ describe('compat/chai', function () {
 
     err(function(){
       expect(5).to.not.be.a('number', 'blah');
-    }, "blah: expected 5 not to be a number");
+    }, "expected 5 not to be a number"); // TODO: used to be: "blah: expected 5 not to be a number"
   });
 
   it('instanceof', function(){

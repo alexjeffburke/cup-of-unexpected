@@ -142,7 +142,7 @@ describe('compat/chai', function () {
 
     err(function(){
       expect(3).to.an.instanceof(Foo, 'blah');
-    }, "blah: expected 3 to be an instance of Foo");
+    }, "expected 3 to be a Foo"); // TODO: used to be: "blah: expected 3 to be an instance of Foo"
   });
 
   it('within(start, finish)', function(){

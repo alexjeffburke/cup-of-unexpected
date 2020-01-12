@@ -26,19 +26,23 @@ Take the following test suite:
 ```javascript
 var expect = require('expect.js');
 
-describe('add', function () {
-	it('should return a number', function () {
-		var result = add(1,2);
-		expect(result).to.be.a('number');
-	});
-	it('should add to numbers correctly', function () {
-		var result = add(2,2);
-		expect(result).to.be.a('number').and.to.eql(3);
-	});
+describe('add', function() {
+  it('should return a number', function() {
+    var result = add(1, 2);
+    expect(result).to.be.a('number');
+  });
+
+  it('should add to numbers correctly', function() {
+    var result = add(2, 2);
+    expect(result)
+      .to.be.a('number')
+      .and.to.eql(3);
+  });
 });
 ```
 
 Install expect the unexpected by running:
+
 ```
 $ npm install --save-dev expect-the-unexpected
 ```
@@ -56,20 +60,24 @@ changing your old expect.js tests.
 ```javascript
 var expect = require('expect-the-unexpected');
 
-describe('add', function () {
-	it('should return a number', function () {
-		var result = add(1,2);
-		expect(result).to.be.a('number');
-	});
-	it('should add to numbers correctly', function () {
-		var result = add(2,2);
-		expect(result).to.be.a('number').and.to.eql(3);
-	});
-	it('should return a curried method if only one argument is given', function () {
-		var add1 = add(1);
-		expect(add1, 'to be a function');
-		expect(add1(2), 'to be', 3);
-	});
+describe('add', function() {
+  it('should return a number', function() {
+    var result = add(1, 2);
+    expect(result).to.be.a('number');
+  });
+
+  it('should add to numbers correctly', function() {
+    var result = add(2, 2);
+    expect(result)
+      .to.be.a('number')
+      .and.to.eql(3);
+  });
+
+  it('should return a curried method if only one argument is given', function() {
+    var add1 = add(1);
+    expect(add1, 'to be a function');
+    expect(add1(2), 'to be', 3);
+  });
 });
 ```
 
@@ -105,6 +113,7 @@ in javascript on the boxed string object, or if you create your strings
 with `new String('foobar')`.
 
 Expect.js would also consider the following to be true:
+
 ```javascript
 expect({ foo: undefined }).to.have.property('foo');
 ```
@@ -129,34 +138,42 @@ require a little work to fix up. The below example is an expect.js custom
 assertion:
 
 ```javascript
-expect.Assertion.prototype.cssClass = function (expected) {
-    var $element = $(this.obj);
-    var elementClasses = ($element.attr('class') || '').split(' ');
+expect.Assertion.prototype.cssClass = function(expected) {
+  var $element = $(this.obj);
+  var elementClasses = ($element.attr('class') || '').split(' ');
 
-    this.obj = elementClasses;
-    this.contain(expected);
+  this.obj = elementClasses;
+  this.contain(expected);
 
-    return this;
+  return this;
 };
 ```
 
 And then the same assertion in expect-the-unexpected
 
 ```javascript
-expect.addCustomAssertion('cssClass', '[not] to have css class', function (expect, subject, value) {
-    var $element = $(subject);
-    var elementClasses = ($element.attr('class') || '').split(' ');
-    expect(elementClasses, '[not] to contain', value);
+expect.addCustomAssertion('cssClass', '[not] to have css class', function(
+  expect,
+  subject,
+  value
+) {
+  var $element = $(subject);
+  var elementClasses = ($element.attr('class') || '').split(' ');
+  expect(elementClasses, '[not] to contain', value);
 });
 ```
 
 And then again as a pure unexpected custom assertion:
 
 ```javascript
-expect.addCustomAssertion('[not] to have css class', function (expect, subject, value) {
-    var $element = $(subject);
-    var elementClasses = ($element.attr('class') || '').split(' ');
-    expect(elementClasses, '[not] to contain', value);
+expect.addCustomAssertion('[not] to have css class', function(
+  expect,
+  subject,
+  value
+) {
+  var $element = $(subject);
+  var elementClasses = ($element.attr('class') || '').split(' ');
+  expect(elementClasses, '[not] to contain', value);
 });
 ```
 
@@ -176,7 +193,6 @@ expect('').to.be.empty();
 ```
 
 The two above examples will work without changes.
-
 
 ### 6: not to throw
 

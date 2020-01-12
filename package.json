@@ -1,7 +1,7 @@
 {
   "name": "expect-the-unexpected",
   "version": "3.0.0",
-  "main": "index.js",
+  "main": "lib/expectTheUnexpected.js",
   "scripts": {
     "test": "mocha",
     "lint": "eslint . && prettier --check '**/*.js'",

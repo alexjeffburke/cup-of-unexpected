@@ -9,8 +9,7 @@
 })(this, function(unexpected) {
     unexpected = unexpected.clone();
 
-    function extend(obj) {
-        var args = Array.prototype.slice.call(arguments, 1);
+    function extend(obj, ...args) {
         args.forEach(function(source) {
             if (source) {
                 for (var prop in source) {
@@ -66,8 +65,8 @@
                 obj.flags[prop] = true;
 
                 if (typeof ExpectFacade.prototype[prop] === 'function') {
-                    var fn = function() {
-                        ExpectFacade.prototype[prop].apply(obj, arguments);
+                    var fn = function(...args) {
+                        ExpectFacade.prototype[prop].apply(obj, args);
 
                         // allow chaining with .and.
                         defineNextStep('and', obj, { and: flags.to });
@@ -108,11 +107,10 @@
         }
     }
 
-    ExpectFacade.prototype.withArgs = function() {
+    ExpectFacade.prototype.withArgs = function(...args) {
         var result = new ExpectFacade(this.subject, Object.keys(flags));
         var subject = this.subject;
         result.flags = this.flags;
-        var args = arguments;
         result.subject = function() {
             return subject.apply(null, args);
         };
@@ -140,8 +138,7 @@
         { name: 'lessThan', assertion: 'to be less than' },
         { name: 'below', assertion: 'to be below' }
     ].forEach(function(methodDefinition) {
-        ExpectFacade.prototype[methodDefinition.name] = function() {
-            var args = Array.prototype.slice.call(arguments);
+        ExpectFacade.prototype[methodDefinition.name] = function(...args) {
             var assertion = expandFlags(
                 '[not] ' + methodDefinition.assertion,
                 this.flags
@@ -155,60 +152,43 @@
                 args[0] = unexpected.it(args[0]);
             }
 
-            unexpected.apply(
-                unexpected,
-                [this.subject, assertion].concat(args)
-            );
+            unexpected.apply(unexpected, [this.subject, assertion, ...args]);
         };
     });
 
     ['property', 'properties'].forEach(function(methodName) {
-        ExpectFacade.prototype[methodName] = function() {
-            var args = Array.prototype.slice.call(arguments);
+        ExpectFacade.prototype[methodName] = function(...args) {
             var assertion = expandFlags(
                 '[not] to have [own] ' + methodName,
                 this.flags
             );
 
-            unexpected.apply(
-                unexpected,
-                [this.subject, assertion].concat(args)
-            );
+            unexpected.apply(unexpected, [this.subject, assertion, ...args]);
         };
     });
 
     ['key', 'keys'].forEach(function(methodName) {
-        ExpectFacade.prototype[methodName] = function() {
-            var args = Array.prototype.slice.call(arguments);
+        ExpectFacade.prototype[methodName] = function(...args) {
             var assertion = expandFlags(
                 '[not] to [only] have ' + methodName,
                 this.flags
             );
 
-            unexpected.apply(
-                unexpected,
-                [this.subject, assertion].concat(args)
-            );
+            unexpected.apply(unexpected, [this.subject, assertion, ...args]);
         };
     });
 
-    ExpectFacade.prototype.fail = function() {
-        var args = Array.prototype.slice.call(arguments);
-        return unexpected.fail.apply(unexpected, args);
-    };
+    ExpectFacade.prototype.fail = (...args) => unexpected.fail(...args);
 
-    function expect(subject) {
-        if (arguments.length > 1) {
-            return unexpected.apply(null, arguments);
+    function expect(subject, ...args) {
+        if (args.length > 1) {
+            unexpected(subject, ...args);
         } else {
             return new ExpectFacade(subject, Object.keys(flags));
         }
     }
 
-    expect.fail = function() {
-        var args = Array.prototype.slice.call(arguments);
-        return unexpected.fail.apply(unexpected, args);
-    };
+    expect.fail = (...args) => unexpected.fail(...args);
     expect.outputFormat = unexpected.outputFormat;
 
     expect.addAssertion = function() {
@@ -222,17 +202,13 @@
     ) {
         unexpected.addAssertion(unexpectedAssertionName, customAssertion);
 
-        ExpectFacade.prototype[assertionName] = function() {
-            var args = Array.prototype.slice.call(arguments);
+        ExpectFacade.prototype[assertionName] = function(...args) {
             var assertion = expandFlags(
                 stripTypes(unexpectedAssertionName),
                 this.flags
             );
 
-            unexpected.apply(
-                unexpected,
-                [this.subject, assertion].concat(args)
-            );
+            unexpected.apply(unexpected, [this.subject, assertion, ...args]);
         };
     };
 

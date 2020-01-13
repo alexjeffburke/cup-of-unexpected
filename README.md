@@ -54,8 +54,7 @@ And change the following:
 +var expect = require('expect-the-unexpected');
 ```
 
-Then when you add a new test, you can use unexpected syntax without
-changing your old expect.js tests.
+Your tests will continue to execute unchanged:
 
 ```javascript
 var expect = require('expect-the-unexpected');
@@ -72,21 +71,7 @@ describe('add', function() {
       .to.be.a('number')
       .and.to.eql(3);
   });
-
-  it('should return a curried method if only one argument is given', function() {
-    var add1 = add(1);
-    expect(add1, 'to be a function');
-    expect(add1(2), 'to be', 3);
-  });
 });
-```
-
-And then, once you get around to refactor all your old expect.js
-assertions, you can just require unexpected instead.
-
-```diff
-- var expect = require('expect-the-unexpected');
-+ var expect = require('unexpected');
 ```
 
 ## Incompatibilities
@@ -131,53 +116,7 @@ expect({}).to.have.keys();
 expect({}, 'to have keys');
 ```
 
-### 4: Custom Assertions
-
-Custom assertions are implemented differently in unexpected, so that will
-require a little work to fix up. The below example is an expect.js custom
-assertion:
-
-```javascript
-expect.Assertion.prototype.cssClass = function(expected) {
-  var $element = $(this.obj);
-  var elementClasses = ($element.attr('class') || '').split(' ');
-
-  this.obj = elementClasses;
-  this.contain(expected);
-
-  return this;
-};
-```
-
-And then the same assertion in expect-the-unexpected
-
-```javascript
-expect.addCustomAssertion('cssClass', '[not] to have css class', function(
-  expect,
-  subject,
-  value
-) {
-  var $element = $(subject);
-  var elementClasses = ($element.attr('class') || '').split(' ');
-  expect(elementClasses, '[not] to contain', value);
-});
-```
-
-And then again as a pure unexpected custom assertion:
-
-```javascript
-expect.addCustomAssertion('[not] to have css class', function(
-  expect,
-  subject,
-  value
-) {
-  var $element = $(subject);
-  var elementClasses = ($element.attr('class') || '').split(' ');
-  expect(elementClasses, '[not] to contain', value);
-});
-```
-
-### 5: empty
+### 4: empty
 
 ```javascript
 expect({}).to.be.empty();
@@ -194,7 +133,7 @@ expect('').to.be.empty();
 
 The two above examples will work without changes.
 
-### 6: not to throw
+### 5: not to throw
 
 Unexpected decided to deprecate matching of the error message when
 asserting that a function did not throw an exception. We felt that it
@@ -212,14 +151,58 @@ The following example will not work.
 expect(aFunctionThatThrowsFoo).not.to.throw('bar');
 ```
 
-### 7: not to have property
+### 6: not to have property
 
-With much of the same reasoning as in no. 6, unexpected does not
+With much of the same reasoning as in no. 5, unexpected does not
 support 'not to have property' with a value. The following example
 will thus not work:
 
 ```javascript
 expect(someObj).not.to.have.property('foo', 'bar');
+```
+
+## Custom Assertions
+
+Custom assertions are implemented differently in Unexpected, so plugins
+written for `expect.js` will not work and it will require a little work
+to fix up.
+
+For the custom assertion in the following example:
+
+```javascript
+expect.Assertion.prototype.cssClass = function(expected) {
+  var $element = $(this.obj);
+  var elementClasses = ($element.attr('class') || '').split(' ');
+
+  this.obj = elementClasses;
+  this.contain(expected);
+
+  return this;
+};
+```
+
+We can implement this with Unexpected assertion syntax and add it
+directly via the fully compatible `addAssertion()` API:
+
+```javascript
+expect.addAssertion('[not] to have css class', function(
+  expect,
+  subject,
+  value
+) {
+  var $element = $(subject);
+  var elementClasses = ($element.attr('class') || '').split(' ');
+  expect(elementClasses, '[not] to contain', value);
+});
+```
+
+The assertion can then be used like any other expect assertion by using its
+dotted path name:
+
+```javascript
+var html = '<div class="foo bar baz"></div>';
+
+expect(html).to.have.css.class('foo');
 ```
 
 ## License

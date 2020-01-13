@@ -6,6 +6,16 @@ describe('index', () => {
     unexpected(expect, 'to be a function');
   });
 
+  it('should throw if given multiple argument', () => {
+    unexpected(
+      () => {
+        expect('foo', 'bar');
+      },
+      'to throw',
+      'Expect takes at most one argument.'
+    );
+  });
+
   describe('.to.be.below(n)', function() {
     it('should pass', () => {
       expect(2).to.be.below(5);
@@ -63,35 +73,18 @@ describe('index', () => {
   });
 
   describe('addAssertion()', () => {
-    it('should error with an informative message', () => {
-      unexpected(
-        () => {
-          expect.addAssertion();
-        },
-        'to throw',
-        'addAssertion() has been renamed addCustomAssertion()'
-      );
-    });
-  });
-
-  describe('addCustomAssertion()', () => {
     it('should allow a simple custom assertion', () => {
-      expect.addCustomAssertion(
-        'foo',
-        '<string> to foo',
-        (unexpected, subject) => {
-          unexpected(subject, 'to contain', 'foo');
-        }
-      );
+      expect.addAssertion('<string> to foo', (unexpected, subject) => {
+        unexpected(subject, 'to contain', 'foo');
+      });
 
       unexpected(() => {
         expect('foobar').to.foo();
       }, 'not to throw');
     });
 
-    it('should allow a camel case assertion', () => {
-      expect.addCustomAssertion(
-        'lowerCaseFoo',
+    it('should allow a nested custom assertion', () => {
+      expect.addAssertion(
         '<string> to lower case foo',
         (unexpected, subject) => {
           unexpected(subject, 'to contain', 'foo');
@@ -99,13 +92,12 @@ describe('index', () => {
       );
 
       unexpected(() => {
-        expect('foobar').to.lowerCaseFoo();
+        expect('foobar').to.lower.case.foo();
       }, 'not to throw');
     });
 
     it('should allow an argument consuming nested', () => {
-      expect.addCustomAssertion(
-        'somethingAtIndex',
+      expect.addAssertion(
         '<array> to have something at index <number>',
         (unexpected, subject, value) => {
           unexpected(subject[value], 'to be defined');
@@ -113,7 +105,7 @@ describe('index', () => {
       );
 
       unexpected(() => {
-        expect([1, 2]).to.have.somethingAtIndex(1);
+        expect([1, 2]).to.have.something.at.index(1);
       }, 'not to throw');
     });
   });

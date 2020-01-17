@@ -155,19 +155,19 @@ describe('compat/chai', function () {
 
     err(function(){
       expect(5).to.not.be.within(4,6, 'blah');
-    }, "blah: expected 5 to not be within 4..6", 'blah');
+    }, "expected 5 not to be within 4..6", 'blah'); // TODO: used to be: "blah: expected 5 to not be within 4..6"
 
     err(function(){
       expect(10).to.be.within(50,100, 'blah');
-    }, "blah: expected 10 to be within 50..100");
+    }, "expected 10 to be within 50..100"); // TODO: used to be: "blah: expected 10 to be within 50..100"
 
     err(function () {
       expect('foo').to.have.length.within(5,7, 'blah');
-    }, "blah: expected \'foo\' to have a length within 5..7");
+    }, /^expected 'foo' to have length within 5, 7/); // TODO: used to be: "blah: expected \'foo\' to have a length within 5..7"
 
     err(function () {
       expect([ 1, 2, 3 ]).to.have.length.within(5,7, 'blah');
-    }, "blah: expected [ 1, 2, 3 ] to have a length within 5..7");
+    }, /^expected \[ 1, 2, 3 \] to have length within 5, 7/); // TODO: used to be: "blah: expected [ 1, 2, 3 ] to have a length within 5..7"
   });
 
   it('above(n)', function(){

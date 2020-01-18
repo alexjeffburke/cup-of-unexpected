@@ -3,6 +3,7 @@
   "version": "3.0.0",
   "main": "lib/expectTheUnexpected.js",
   "scripts": {
+    "build": "mkdir -p build && buble -o build/lib lib",
     "test": "mocha",
     "lint": "eslint . && prettier --check '**/*.js'",
     "coverage": "nyc --reporter lcov --reporter text mocha"
@@ -24,6 +25,7 @@
     "unexpected": "^11.12.1"
   },
   "devDependencies": {
+    "buble": "^0.19.8",
     "coveralls": "^3.0.9",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.7.0",

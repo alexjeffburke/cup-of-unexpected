@@ -2,5 +2,8 @@
 /coverage/
 /.nyc_output/
 
+# Build
+/build/
+
 # VS Code User Specific Settings
 /.vscode/settings.json

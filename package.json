@@ -5,6 +5,7 @@
   "scripts": {
     "build": "mkdir -p build && buble -o build/lib lib",
     "bundle": "npm run build && rollup -c",
+    "prepublishOnly": "npm run bundle",
     "test": "mocha",
     "lint": "eslint . && prettier --check '**/*.js'",
     "coverage": "nyc --reporter lcov --reporter text mocha"
@@ -15,6 +16,8 @@
     "Alex J Burke <alex@alexjeffburke.com>"
   ],
   "files": [
+    "index.js",
+    "index.js.map",
     "lib"
   ],
   "repository": {

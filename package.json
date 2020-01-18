@@ -4,6 +4,7 @@
   "main": "lib/expectTheUnexpected.js",
   "scripts": {
     "build": "mkdir -p build && buble -o build/lib lib",
+    "bundle": "npm run build && rollup -c",
     "test": "mocha",
     "lint": "eslint . && prettier --check '**/*.js'",
     "coverage": "nyc --reporter lcov --reporter text mocha"
@@ -36,6 +37,9 @@
     "eslint-plugin-standard": "^4.0.1",
     "mocha": "^6.2.2",
     "nyc": "^15.0.0",
-    "prettier": "~1.19.1"
+    "prettier": "~1.19.1",
+    "rollup": "^1.29.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0"
   }
 }

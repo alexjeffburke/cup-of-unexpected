@@ -4,6 +4,8 @@
 
 # Build
 /build/
+/index.js
+/index.js.map
 
 # VS Code User Specific Settings
 /.vscode/settings.json

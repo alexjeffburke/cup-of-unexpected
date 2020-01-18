@@ -3,3 +3,5 @@ test/compat/*.js
 
 # Build
 build/
+index.js
+index.js.map

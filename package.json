@@ -12,6 +12,9 @@
     "Sune Simonsen <sune@we-knowhow.dk>",
     "Alex J Burke <alex@alexjeffburke.com>"
   ],
+  "files": [
+    "lib"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/unexpectedjs/expect-the-unexpected.git"

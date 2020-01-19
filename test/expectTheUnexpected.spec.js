@@ -108,5 +108,58 @@ describe('index', () => {
         expect([1, 2]).to.have.something.at.index(1);
       }, 'not to throw');
     });
+
+    describe('when called with an empty assertion', () => {
+      it('should throw with an informative message', () => {
+        unexpected(
+          () => {
+            expect.addAssertion(
+              '<array><number>',
+              (unexpected, subject, value) => {
+                unexpected(subject[value], 'to be defined');
+              }
+            );
+          },
+          'to throw',
+          'cannot define empty assertion'
+        );
+      });
+    });
+
+    describe('when called with an existing assertion', () => {
+      it('should throw with an informative message', () => {
+        unexpected(
+          () => {
+            expect.addAssertion(
+              '<string> to contain',
+              (unexpected, subject, value) => {
+                unexpected(subject[value], 'to be defined');
+              }
+            );
+          },
+          'to throw',
+          'cannot redefine existing assertion "contain()"'
+        );
+      });
+    });
+
+    describe('when called with missing flags', () => {
+      it('should throw with an informative message', () => {
+        expect.addAssertion(
+          '<array> to have something at position <number>',
+          (unexpected, subject, value) => {
+            unexpected(subject[value], 'to be defined');
+          }
+        );
+
+        unexpected(
+          () => {
+            expect([1, 2]).to.have.something.position(1);
+          },
+          'to throw',
+          'incomplete flags for custom assertion'
+        );
+      });
+    });
   });
 });

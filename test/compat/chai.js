@@ -292,7 +292,7 @@ describe('compat/chai', function () {
 
     err(function(){
       expect('foobar').to.not.match(/^foo/i, 'blah')
-    }, "blah: expected 'foobar' not to match /^foo/i");
+    }, /^blah: expected 'foobar' not to match \/\^foo\/i/);
   });
 
   it('length(n)', function(){

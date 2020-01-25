@@ -1,7 +1,24 @@
 var unexpected = require('unexpected');
+
 var expect = require('../');
 
 describe('index', () => {
+  unexpected = unexpected.clone();
+
+  unexpected.addAssertion(
+    '<function> to throw textual message <regexp|string>',
+    (expect, subject, value) => {
+      expect(
+        subject,
+        'to throw',
+        expect.it(error => {
+          expect.errorMode = 'bubble';
+          expect(error.getErrorMessage('text').toString(), 'to satisfy', value);
+        })
+      );
+    }
+  );
+
   it('should be a function', () => {
     unexpected(expect, 'to be a function');
   });
@@ -26,7 +43,7 @@ describe('index', () => {
         () => {
           expect(5).to.be.below(5);
         },
-        'to throw',
+        'to throw textual message',
         'expected 5 to be below 5'
       );
     });
@@ -42,7 +59,7 @@ describe('index', () => {
         () => {
           expect(5).to.be.lessThan(5);
         },
-        'to throw',
+        'to throw textual message',
         'expected 5 to be less than 5'
       );
     });
@@ -66,8 +83,8 @@ describe('index', () => {
             expect(e).to.be.a(SyntaxError);
           });
         },
-        'to throw',
-        /[ ]{2}expected Error\(\) to be a SyntaxError$/
+        'to throw textual message',
+        'expected Error() to be a SyntaxError'
       );
     });
   });

@@ -26,6 +26,7 @@
   },
   "license": "ISC",
   "dependencies": {
+    "assertion-error": "^1.1.0",
     "unexpected": "^11.12.1"
   },
   "devDependencies": {

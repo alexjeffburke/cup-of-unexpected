@@ -184,15 +184,15 @@ describe('compat/chai', function () {
 
     err(function(){
       expect(10).to.not.be.above(6, 'blah');
-    }, "blah: expected 10 to be at most 6");
+    }, "blah: expected 10 not to be above 6"); // TODO: used to be: "blah: expected 10 to be at most 6"
 
     err(function () {
       expect('foo').to.have.length.above(4, 'blah');
-    }, "blah: expected \'foo\' to have a length above 4 but got 3");
+    }, /^blah: expected 'foo' to have length above 4/); // TODO: used to be: "blah: expected \'foo\' to have a length above 4 but got 3"
 
     err(function () {
       expect([ 1, 2, 3 ]).to.have.length.above(4, 'blah');
-    }, "blah: expected [ 1, 2, 3 ] to have a length above 4 but got 3");
+    }, /^blah: expected \[ 1, 2, 3 \] to have length above 4/); // TODO: usde to be: "blah: expected [ 1, 2, 3 ] to have a length above 4 but got 3"
   });
 
   it('least(n)', function(){

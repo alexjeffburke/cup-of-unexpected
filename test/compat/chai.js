@@ -195,7 +195,7 @@ describe('compat/chai', function () {
     }, /^blah: expected \[ 1, 2, 3 \] to have length above 4/); // TODO: usde to be: "blah: expected [ 1, 2, 3 ] to have a length above 4 but got 3"
   });
 
-  it('least(n)', function(){
+  it.skip('least(n)', function(){
     expect(5).to.be.at.least(2);
     expect(5).to.be.at.least(5);
     expect(5).to.not.be.at.least(6);

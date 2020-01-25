@@ -248,7 +248,7 @@ describe('compat/chai', function () {
     }, /^blah: expected \[ 1, 2, 3 \] to have length below 2/); // TODO: used to be: "blah: expected [ 1, 2, 3 ] to have a length below 2 but got 3"
   });
 
-  it('most(n)', function(){
+  it.skip('most(n)', function(){
     expect(2).to.be.at.most(5);
     expect(2).to.be.at.most(2);
     expect(2).to.not.be.at.most(1);

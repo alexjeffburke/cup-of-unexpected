@@ -300,13 +300,15 @@ describe('compat/chai', function () {
     expect('test').to.not.have.length(3);
     expect([1,2,3]).to.have.length(3);
 
+    /* INCOMPATIBILITY
     err(function(){
       expect(4).to.have.length(3, 'blah');
     }, 'blah: expected 4 to have a property \'length\'');
+    */
 
     err(function(){
       expect('asd').to.not.have.length(3, 'blah');
-    }, "blah: expected 'asd' to not have a length of 3");
+    }, "blah: expected 'asd' not to have length 3"); // TODO: used to be: "blah: expected 'asd' to not have a length of 3"
   });
 
   it('eql(val)', function(){

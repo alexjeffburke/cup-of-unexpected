@@ -237,15 +237,15 @@ describe('compat/chai', function () {
 
     err(function(){
       expect(6).to.not.be.below(10, 'blah');
-    }, "blah: expected 6 to be at least 10");
+    }, "blah: expected 6 not to be below 10"); // TODO: used to be: "blah: expected 6 to be at least 10"
 
     err(function () {
       expect('foo').to.have.length.below(2, 'blah');
-    }, "blah: expected \'foo\' to have a length below 2 but got 3");
+    }, /^blah: expected 'foo' to have length below 2/); // TODO: used to be: "blah: expected \'foo\' to have a length below 2 but got 3"
 
     err(function () {
       expect([ 1, 2, 3 ]).to.have.length.below(2, 'blah');
-    }, "blah: expected [ 1, 2, 3 ] to have a length below 2 but got 3");
+    }, /^blah: expected \[ 1, 2, 3 \] to have length below 2/); // TODO: used to be: "blah: expected [ 1, 2, 3 ] to have a length below 2 but got 3"
   });
 
   it('most(n)', function(){

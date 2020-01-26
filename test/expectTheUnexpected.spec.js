@@ -89,6 +89,18 @@ describe('index', () => {
     });
   });
 
+  describe('.to.have.property(prop, val)', () => {
+    it('should throw with an informative message with ".not"', () => {
+      unexpected(
+        () => {
+          expect(undefined).not.to.have.property('foo', true);
+        },
+        'to throw',
+        'The "not" flag with a value is unsafe in property().'
+      );
+    });
+  });
+
   describe('.to.have.deep.property()', () => {
     it('should throw with an informative message', () => {
       unexpected(

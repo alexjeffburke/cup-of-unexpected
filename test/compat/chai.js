@@ -338,11 +338,11 @@ describe('compat/chai', function () {
 
     err(function(){
       expect(4).to.equal(3, 'blah');
-    }, 'blah: expected 4 to equal 3');
+    }, 'blah: expected 4 to be 3'); // TODO: used to be: 'blah: expected 4 to equal 3'
 
     err(function(){
       expect('4').to.equal(4, 'blah');
-    }, "blah: expected '4' to equal 4");
+    }, "blah: expected '4' to be 4"); // TODO: used to be: "blah: expected '4' to equal 4"
   });
 
   it('deep.equal(val)', function(){

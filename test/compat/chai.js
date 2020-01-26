@@ -578,9 +578,11 @@ describe('compat/chai', function () {
     expect('test').to.haveOwnProperty('length');
     expect({ length: 12 }).to.have.ownProperty('length');
 
+    /* INCOMPATIBLITY
     err(function(){
       expect({ length: 12 }).to.not.have.ownProperty('length', 'blah');
     }, "blah: expected { length: 12 } to not have own property 'length'");
+    */
   });
 
   it('ownPropertyDescriptor(name)', function(){

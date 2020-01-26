@@ -328,7 +328,7 @@ describe('compat/chai', function () {
 
       err(function () {
         expect(new Buffer([ 0 ])).to.eql(new Buffer([ 1 ]));
-      }, 'expected <Buffer 00> to deeply equal <Buffer 01>');
+      }, /expected Buffer.from\(\[0x00\]\) to deeply equal Buffer.from\(\[0x01\]\)/); // TODO: used to be: 'expected <Buffer 00> to deeply equal <Buffer 01>'
     });
   }
 

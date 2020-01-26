@@ -427,13 +427,17 @@ describe('compat/chai', function () {
       expect(4).to.be.NaN;
     }, "expected 4 to be NaN");
 
+    /* INCOMPATIBILITY
     err(function(){
       expect([]).to.be.NaN;
     }, "expected [] to be NaN");
+    */
 
+    /* INCOMPATIBILITY
     err(function(){
       expect('foo').not.to.be.NaN;
     }, "expected 'foo' not to be NaN");
+    */
   });
 
   it('property(name)', function(){

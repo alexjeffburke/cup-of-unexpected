@@ -89,6 +89,18 @@ describe('index', () => {
     });
   });
 
+  describe('.to.have.deep.property()', () => {
+    it('should throw with an informative message', () => {
+      unexpected(
+        () => {
+          expect(undefined).to.have.deep.property();
+        },
+        'to throw',
+        'The "deep" flag is not supported with property().'
+      );
+    });
+  });
+
   describe('addAssertion()', () => {
     it('should allow a simple custom assertion', () => {
       expect.addAssertion('<string> to foo', (unexpected, subject) => {

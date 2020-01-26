@@ -469,7 +469,7 @@ describe('compat/chai', function () {
     }, "expected { foo: { bar: 'baz' } } to have a property 'foo.bar'");
   });
 
-  it('deep.property(name)', function(){
+  it.skip('deep.property(name)', function(){
     expect({ 'foo.bar': 'baz'})
       .to.not.have.deep.property('foo.bar');
     expect({ foo: { bar: 'baz' } })

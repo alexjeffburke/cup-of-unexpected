@@ -738,19 +738,25 @@ describe('compat/chai', function () {
     expect({ foo: 1, bar: 2 }).to.not.contain.keys('foo', 'baz');
     expect({ foo: 1, bar: 2 }).to.not.contain.keys('baz', 'foo');
 
+    /* INCOMPATIBLITY
     expect({ foo: 1, bar: 2 }).to.have.any.keys('foo', 'baz');
     expect({ foo: 1, bar: 2 }).to.have.any.keys('foo');
     expect({ foo: 1, bar: 2 }).to.contain.any.keys('bar', 'baz');
     expect({ foo: 1, bar: 2 }).to.contain.any.keys(['foo']);
+    */
     expect({ foo: 1, bar: 2 }).to.have.all.keys(['bar', 'foo']);
     expect({ foo: 1, bar: 2 }).to.contain.all.keys(['bar', 'foo']);
+    /* INCOMPATIBLITY
     expect({ foo: 1, bar: 2 }).contain.any.keys({ 'foo': 6 });
+    */
     expect({ foo: 1, bar: 2 }).have.all.keys({ 'foo': 6, 'bar': 7 });
     expect({ foo: 1, bar: 2 }).contain.all.keys({ 'bar': 7, 'foo': 6 });
 
+    /* INCOMPATIBLITY
     expect({ foo: 1, bar: 2 }).to.not.have.any.keys('baz', 'abc', 'def');
     expect({ foo: 1, bar: 2 }).to.not.have.any.keys('baz');
     expect({ foo: 1, bar: 2 }).to.not.contain.any.keys('baz');
+    */
     expect({ foo: 1, bar: 2 }).to.not.have.all.keys(['baz', 'foo']);
     expect({ foo: 1, bar: 2 }).to.not.contain.all.keys(['baz', 'foo']);
     expect({ foo: 1, bar: 2 }).not.have.all.keys({ 'baz': 8, 'foo': 7 });
@@ -784,97 +790,106 @@ describe('compat/chai', function () {
 
     err(function(){
       expect({ foo: 1 }).to.have.keys(['bar']);
-    }, "expected { foo: 1 } to have key 'bar'");
+    }, "expected { foo: 1 } to have keys [ 'bar' ]"); // "expected { foo: 1 } to have key 'bar'"
 
     err(function(){
       expect({ foo: 1 }).to.have.keys(['bar', 'baz']);
-    }, "expected { foo: 1 } to have keys 'bar', and 'baz'");
+    }, "expected { foo: 1 } to have keys [ 'bar', 'baz' ]"); // "expected { foo: 1 } to have keys 'bar', and 'baz'"
 
     err(function(){
       expect({ foo: 1 }).to.have.keys(['foo', 'bar', 'baz']);
-    }, "expected { foo: 1 } to have keys 'foo', 'bar', and 'baz'");
+    }, "expected { foo: 1 } to have keys [ 'foo', 'bar', 'baz' ]"); // "expected { foo: 1 } to have keys 'foo', 'bar', and 'baz'"
 
     err(function(){
       expect({ foo: 1 }).to.not.have.keys(['foo']);
-    }, "expected { foo: 1 } to not have key 'foo'");
+    }, "expected { foo: 1 } not to have keys [ 'foo' ]"); // "expected { foo: 1 } to not have key 'foo'"
 
     err(function(){
       expect({ foo: 1 }).to.not.have.keys(['foo']);
-    }, "expected { foo: 1 } to not have key 'foo'");
+    }, "expected { foo: 1 } not to have keys [ 'foo' ]"); // "expected { foo: 1 } to not have key 'foo'"
 
     err(function(){
       expect({ foo: 1, bar: 2 }).to.not.have.keys(['foo', 'bar']);
-    }, "expected { foo: 1, bar: 2 } to not have keys 'foo', and 'bar'");
+    }, "expected { foo: 1, bar: 2 } not to have keys [ 'foo', 'bar' ]"); // "expected { foo: 1, bar: 2 } to not have keys 'foo', and 'bar'"
 
+    /* INCOMPATIBLITY
     err(function(){
       expect({ foo: 1, bar: 2 }).to.have.all.keys('foo');
     }, "expected { foo: 1, bar: 2 } to have key 'foo'");
+    */
 
     err(function(){
       expect({ foo: 1 }).to.not.contain.keys(['foo']);
-    }, "expected { foo: 1 } to not contain key 'foo'");
+    }, "expected { foo: 1 } not to have keys [ 'foo' ]"); // "expected { foo: 1 } to not contain key 'foo'"
 
     err(function(){
       expect({ foo: 1 }).to.contain.keys('foo', 'bar');
-    }, "expected { foo: 1 } to contain keys 'foo', and 'bar'");
+    }, "expected { foo: 1 } to have keys [ 'foo', 'bar' ]"); // "expected { foo: 1 } to contain keys 'foo', and 'bar'"
 
+    /* INCOMPATIBLITY
     err(function() {
       expect({ foo: 1 }).to.have.any.keys('baz');
     }, "expected { foo: 1 } to have key 'baz'");
+    */
 
     err(function(){
       expect({ foo: 1, bar: 2 }).to.not.have.all.keys(['foo', 'bar']);
-    }, "expected { foo: 1, bar: 2 } to not have keys 'foo', and 'bar'");
+    }, "expected { foo: 1, bar: 2 } not to have keys [ 'foo', 'bar' ]"); // "expected { foo: 1, bar: 2 } to not have keys 'foo', and 'bar'"
 
+    /* INCOMPATIBLITY
     err(function(){
       expect({ foo: 1, bar: 2 }).to.not.have.any.keys(['foo', 'baz']);
     }, "expected { foo: 1, bar: 2 } to not have keys 'foo', or 'baz'");
+    */
 
     // repeat previous tests with Object as arg.
     err(function(){
       expect({ foo: 1 }).have.keys({ 'bar': 1 });
-    }, "expected { foo: 1 } to have key 'bar'");
+    }, "expected { foo: 1 } to have keys [ 'bar' ]"); // "expected { foo: 1 } to have key 'bar'"
 
     err(function(){
       expect({ foo: 1 }).have.keys({ 'bar': 1, 'baz': 1});
-    }, "expected { foo: 1 } to have keys 'bar', and 'baz'");
+    }, "expected { foo: 1 } to have keys [ 'bar', 'baz' ]"); // "expected { foo: 1 } to have keys 'bar', and 'baz'"
 
     err(function(){
       expect({ foo: 1 }).have.keys({ 'foo': 1, 'bar': 1, 'baz': 1});
-    }, "expected { foo: 1 } to have keys 'foo', 'bar', and 'baz'");
+    }, "expected { foo: 1 } to have keys [ 'foo', 'bar', 'baz' ]"); // "expected { foo: 1 } to have keys 'foo', 'bar', and 'baz'"
 
     err(function(){
       expect({ foo: 1 }).not.have.keys({ 'foo': 1 });
-    }, "expected { foo: 1 } to not have key 'foo'");
+    }, "expected { foo: 1 } not to have keys [ 'foo' ]"); // "expected { foo: 1 } to not have key 'foo'"
 
     err(function(){
       expect({ foo: 1 }).not.have.keys({ 'foo': 1 });
-    }, "expected { foo: 1 } to not have key 'foo'");
+    }, "expected { foo: 1 } not to have keys [ 'foo' ]"); // "expected { foo: 1 } to not have key 'foo'"
 
     err(function(){
       expect({ foo: 1, bar: 2 }).not.have.keys({ 'foo': 1, 'bar': 1});
-    }, "expected { foo: 1, bar: 2 } to not have keys 'foo', and 'bar'");
+    }, "expected { foo: 1, bar: 2 } not to have keys [ 'foo', 'bar' ]"); // "expected { foo: 1, bar: 2 } to not have keys 'foo', and 'bar'"
 
     err(function(){
       expect({ foo: 1 }).not.contain.keys({ 'foo': 1 });
-    }, "expected { foo: 1 } to not contain key 'foo'");
+    }, "expected { foo: 1 } not to have keys [ 'foo' ]"); // "expected { foo: 1 } to not contain key 'foo'"
 
     err(function(){
       expect({ foo: 1 }).contain.keys('foo', 'bar');
-    }, "expected { foo: 1 } to contain keys 'foo', and 'bar'");
+    }, "expected { foo: 1 } to have keys [ 'foo', 'bar' ]"); // "expected { foo: 1 } to contain keys 'foo', and 'bar'"
 
+    /* INCOMPATIBLITY
     err(function() {
       expect({ foo: 1 }).have.any.keys('baz');
     }, "expected { foo: 1 } to have key 'baz'");
+    */
 
     err(function(){
       expect({ foo: 1, bar: 2 }).not.have.all.keys({ 'foo': 1, 'bar': 1});
-    }, "expected { foo: 1, bar: 2 } to not have keys 'foo', and 'bar'");
+    }, "expected { foo: 1, bar: 2 } not to have keys [ 'foo', 'bar' ]"); // "expected { foo: 1, bar: 2 } to not have keys 'foo', and 'bar'"
 
+    /* INCOMPATIBLITY
     err(function(){
       expect({ foo: 1, bar: 2 }).not.have.any.keys({ 'foo': 1, 'baz': 1});
     }, "expected { foo: 1, bar: 2 } to not have keys 'foo', or 'baz'");
-
+    */
   });
 
   it('keys(array) will not mutate array (#359)', function () {

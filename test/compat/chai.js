@@ -665,19 +665,19 @@ describe('compat/chai', function () {
 
     err(function(){
       expect(['bar', 'foo']).to.not.include('foo', 'blah');
-    }, "blah: expected [ 'bar', 'foo' ] to not include 'foo'");
+    }, /^blah: expected \[ 'bar', 'foo' \] not to include 'foo'/); // TODO: used to be: "blah: expected [ 'bar', 'foo' ] to not include 'foo'"
 
     err(function(){
       expect({a:1}).to.include({b:2});
-    }, "expected { a: 1 } to have a property 'b'");
+    }, /expected { a: 1 } to include { b: 2 }/); // TODO: used to be: "expected { a: 1 } to have a property 'b'"
 
     err(function(){
       expect({a:1,b:2}).to.not.include({b:2});
-    }, "expected { a: 1, b: 2 } to not include { b: 2 }");
+    }, "expected { a: 1, b: 2 } not to include { b: 2 }"); // TODO: used to be: "expected { a: 1, b: 2 } to not include { b: 2 }"
 
     err(function(){
       expect([{a:1},{b:2}]).to.not.include({b:2});
-    }, "expected [ { a: 1 }, { b: 2 } ] to not include { b: 2 }");
+    }, /^expected \[ { a: 1 }, { b: 2 } \] not to include { b: 2 }/); // TODO: used to be: "expected [ { a: 1 }, { b: 2 } ] to not include { b: 2 }"
 
     err(function(){
       expect(true).to.include(true);

@@ -401,11 +401,11 @@ describe('compat/chai', function () {
 
     err(function(){
       expect(new FakeArgs).not.to.be.empty;
-    }, "expected { length: 0 } not to be empty");
+    }, "expected FakeArgs({}) not to be empty"); // TODO: used to be: "expected { length: 0 } not to be empty"
 
     err(function(){
       expect({arguments: 0}).to.be.empty;
-    }, "expected { arguments: 0 } to be empty");
+    }, /^expected { arguments: 0 } to be empty/);
 
     err(function(){
       expect({}).not.to.be.empty;
@@ -413,7 +413,7 @@ describe('compat/chai', function () {
 
     err(function(){
       expect({foo: 'bar'}).to.be.empty;
-    }, "expected { foo: \'bar\' } to be empty");
+    }, /^expected { foo: 'bar' } to be empty/);
   });
 
   it('NaN', function() {

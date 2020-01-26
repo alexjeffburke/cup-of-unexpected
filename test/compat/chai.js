@@ -636,11 +636,11 @@ describe('compat/chai', function () {
 
     err(function(){
       expect('foobar').to.have.string('baz', 'blah');
-    }, "blah: expected 'foobar' to contain 'baz'");
+    }, /^blah: expected 'foobar' to contain 'baz'/);
 
     err(function(){
       expect('foobar').to.not.have.string('bar', 'blah');
-    }, "blah: expected 'foobar' to not contain 'bar'");
+    }, /^blah: expected 'foobar' not to contain 'bar'/); // TODO: used to be: "blah: expected 'foobar' to not contain 'bar'"
   });
 
   it('include()', function(){

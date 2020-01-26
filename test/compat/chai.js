@@ -599,9 +599,13 @@ describe('compat/chai', function () {
     };
     Object.defineProperty(obj, 'test', descriptor);
     expect(obj).to.have.ownPropertyDescriptor('test', descriptor);
+
+    /* INCOMPATIBLITY
     err(function(){
       expect(obj).not.to.have.ownPropertyDescriptor('test', descriptor, 'blah');
     }, /^blah: expected the own property descriptor for 'test' on \{ test: NaN \} to not match \{ [^\}]+ \}$/);
+    */
+
     err(function(){
       var wrongDescriptor = {
         configurable: false,
@@ -610,13 +614,15 @@ describe('compat/chai', function () {
         value: NaN
       };
       expect(obj).to.have.ownPropertyDescriptor('test', wrongDescriptor, 'blah');
-    }, /^blah: expected the own property descriptor for 'test' on \{ test: NaN \} to match \{ [^\}]+ \}, got \{ [^\}]+ \}$/);
+    }, /to have own property descriptor 'test', { configurable: false, enumerable: true, writable: false, value: NaN }/); // TODO: used to be: /^blah: expected the own property descriptor for 'test' on \{ test: NaN \} to match \{ [^\}]+ \}, got \{ [^\}]+ \}$/
 
     err(function(){
       expect(obj).to.have.ownPropertyDescriptor('test2', 'blah');
-    }, "blah: expected { test: NaN } to have an own property descriptor for 'test2'");
+    }, "blah: expected { test: NaN } to have own property descriptor 'test2'"); // TODO: used to be: "blah: expected { test: NaN } to have an own property descriptor for 'test2'"
 
+    /* INCOMPATIBLITY
     expect(obj).to.have.ownPropertyDescriptor('test').and.have.property('enumerable', true);
+    */
   });
 
   it('string()', function(){

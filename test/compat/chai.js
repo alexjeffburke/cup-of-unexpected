@@ -909,7 +909,7 @@ describe('compat/chai', function () {
 
     err(function(){
       expect(tea).to.have.property('extras').with.lengthOf(4);
-    }, "expected [ 'milk', 'sugar', 'smile' ] to have a length of 4 but got 3");
+    }, /^expected \[ 'milk', 'sugar', 'smile' \] to have length 4/); // TODO: used to be: "expected [ 'milk', 'sugar', 'smile' ] to have a length of 4 but got 3"
 
     expect(tea).to.be.a('object').and.have.property('name', 'chai');
 

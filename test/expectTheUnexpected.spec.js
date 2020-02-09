@@ -184,14 +184,14 @@ describe('index', () => {
         unexpected(
           () => {
             expect.addAssertion(
-              '<string> to contain',
+              '<string> to include',
               (unexpected, subject, value) => {
-                unexpected(subject[value], 'to be defined');
+                unexpected(subject[value], 'to contain', value);
               }
             );
           },
           'to throw',
-          'cannot redefine existing assertion "contain()"'
+          'cannot redefine existing assertion "include()"'
         );
       });
     });

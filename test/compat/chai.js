@@ -1175,7 +1175,7 @@ describe('compat/chai', function () {
     }, 'expected [ { id: 1 } ] to include deep members [ { id: 2 } ]'); // "expected [ { id: 1 } ] to have the same members as [ { id: 2 } ]"
   });
 
-  it('change', function() {
+  it.skip('change', function() {
     var obj = { value: 10, str: 'foo' },
         fn     = function() { obj.value += 5 },
         sameFn = function() { 'foo' + 'bar' },

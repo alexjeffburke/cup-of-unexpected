@@ -65,6 +65,18 @@ describe('index', () => {
     });
   });
 
+  describe('.to.change()', () => {
+    it('should throw with an informative message', () => {
+      unexpected(
+        () => {
+          expect(undefined).to.change();
+        },
+        'to throw',
+        'The change() assertion is not supported.'
+      );
+    });
+  });
+
   describe('.to.respondTo()', () => {
     it('should throw with an informative message', () => {
       unexpected(

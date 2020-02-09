@@ -1090,21 +1090,21 @@ describe('compat/chai', function () {
 
     err(function(){
       expect(2).to.be.closeTo(1.0, 0.5, 'blah');
-    }, "blah: expected 2 to be close to 1 +/- 0.5");
+    }, 'blah: expected 2 to be close to 1 (epsilon: 5e-1)'); // "blah: expected 2 to be close to 1 +/- 0.5"
 
     err(function(){
       expect(-10).to.be.closeTo(20, 29, 'blah');
-    }, "blah: expected -10 to be close to 20 +/- 29");
+    }, 'blah: expected -10 to be close to 20 (epsilon: 2.9e+1)'); // "blah: expected -10 to be close to 20 +/- 29"
 
-    err(function() {
+    errIgnoringMessage(function() {
       expect([1.5]).to.be.closeTo(1.0, 0.5);
     }, "expected [ 1.5 ] to be a number");
 
-    err(function() {
+    errIgnoringMessage(function() {
       expect(1.5).to.be.closeTo("1.0", 0.5);
     }, "the arguments to closeTo or approximately must be numbers");
 
-    err(function() {
+    errIgnoringMessage(function() {
       expect(1.5).to.be.closeTo(1.0, true);
     }, "the arguments to closeTo or approximately must be numbers");
   });

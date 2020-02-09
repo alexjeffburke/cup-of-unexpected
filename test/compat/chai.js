@@ -1214,7 +1214,7 @@ describe('compat/chai', function () {
 
     err(function() {
         expect({}).to.not.be.extensible;
-    }, 'expected {} to not be extensible');
+    }, 'expected {} not to be extensible'); // 'expected {} to not be extensible'
 
     // Making sure ES6-like Object.isExtensible response is respected for all primitive types
 

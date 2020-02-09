@@ -1300,7 +1300,7 @@ describe('compat/chai', function () {
 
     err(function() {
         expect(frozenObject).to.not.be.frozen;
-    }, 'expected {} to not be frozen');
+    }, 'expected {} not to be frozen'); // 'expected {} to not be frozen'
 
     // Making sure ES6-like Object.isFrozen response is respected for all primitive types
 
@@ -1310,23 +1310,23 @@ describe('compat/chai', function () {
     expect(false).to.be.frozen;
     expect(undefined).to.be.frozen;
 
-    err(function() {
+    errIgnoringMessage(function() {
       expect(42).to.not.be.frozen;
     }, 'expected 42 to not be frozen');
 
-    err(function() {
+    errIgnoringMessage(function() {
       expect(null).to.not.be.frozen;
     }, 'expected null to not be frozen');
 
-    err(function() {
+    errIgnoringMessage(function() {
       expect('foo').to.not.be.frozen;
     }, 'expected \'foo\' to not be frozen');
 
-    err(function() {
+    errIgnoringMessage(function() {
       expect(false).to.not.be.frozen;
     }, 'expected false to not be frozen');
 
-    err(function() {
+    errIgnoringMessage(function() {
       expect(undefined).to.not.be.frozen;
     }, 'expected undefined to not be frozen');
   });

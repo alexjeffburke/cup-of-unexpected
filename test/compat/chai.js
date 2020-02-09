@@ -1172,7 +1172,7 @@ describe('compat/chai', function () {
     expect([{ id: 2 }]).not.deep.members([{ id: 1 }]);
     err(function(){
       expect([{ id: 1 }]).deep.members([{ id: 2 }])
-    }, "expected [ { id: 1 } ] to have the same members as [ { id: 2 } ]");
+    }, 'expected [ { id: 1 } ] to include deep members [ { id: 2 } ]'); // "expected [ { id: 1 } ] to have the same members as [ { id: 2 } ]"
   });
 
   it('change', function() {

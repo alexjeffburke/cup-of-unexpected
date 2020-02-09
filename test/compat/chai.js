@@ -1257,7 +1257,7 @@ describe('compat/chai', function () {
 
     err(function() {
         expect(sealedObject).to.not.be.sealed;
-    }, 'expected {} to not be sealed');
+    }, 'expected {} not to be sealed'); // 'expected {} to not be sealed'
 
     // Making sure ES6-like Object.isSealed response is respected for all primitive types
 
@@ -1267,23 +1267,23 @@ describe('compat/chai', function () {
     expect(false).to.be.sealed;
     expect(undefined).to.be.sealed;
 
-    err(function() {
+    errIgnoringMessage(function() {
       expect(42).to.not.be.sealed;
     }, 'expected 42 to not be sealed');
 
-    err(function() {
+    errIgnoringMessage(function() {
       expect(null).to.not.be.sealed;
     }, 'expected null to not be sealed');
 
-    err(function() {
+    errIgnoringMessage(function() {
       expect('foo').to.not.be.sealed;
     }, 'expected \'foo\' to not be sealed');
 
-    err(function() {
+    errIgnoringMessage(function() {
       expect(false).to.not.be.sealed;
     }, 'expected false to not be sealed');
 
-    err(function() {
+    errIgnoringMessage(function() {
       expect(undefined).to.not.be.sealed;
     }, 'expected undefined to not be sealed');
   });

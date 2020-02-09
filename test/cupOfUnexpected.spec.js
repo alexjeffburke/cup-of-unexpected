@@ -1,8 +1,8 @@
 var unexpected = require('unexpected');
 
-var expect = require('../');
+var expect = require('../lib/cupOfUnexpected').expect;
 
-describe('index', () => {
+describe('cupOfUnexpected', () => {
   unexpected = unexpected.clone();
 
   unexpected.addAssertion(

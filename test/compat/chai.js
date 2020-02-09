@@ -1,5 +1,5 @@
 var unexpected = require('unexpected');
-var expect = require('../../');
+var expect = require('../../lib/cupOfUnexpected').expect;
 
 /**
  * Module dependencies.

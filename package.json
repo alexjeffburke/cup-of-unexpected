@@ -1,7 +1,7 @@
 {
   "name": "expect-the-unexpected",
   "version": "3.0.0",
-  "main": "lib/expectTheUnexpected.js",
+  "main": "lib/cupOfUnexpected.js",
   "scripts": {
     "build": "mkdir -p build && buble -o build/lib lib",
     "bundle": "npm run build && rollup -c",

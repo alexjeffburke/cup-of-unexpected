@@ -77,6 +77,30 @@ describe('index', () => {
     });
   });
 
+  describe('.to.decrease()', () => {
+    it('should throw with an informative message', () => {
+      unexpected(
+        () => {
+          expect(undefined).to.decrease();
+        },
+        'to throw',
+        'The decrease() assertion is not supported.'
+      );
+    });
+  });
+
+  describe('.to.increase()', () => {
+    it('should throw with an informative message', () => {
+      unexpected(
+        () => {
+          expect(undefined).to.increase();
+        },
+        'to throw',
+        'The increase() assertion is not supported.'
+      );
+    });
+  });
+
   describe('.to.respondTo()', () => {
     it('should throw with an informative message', () => {
       unexpected(

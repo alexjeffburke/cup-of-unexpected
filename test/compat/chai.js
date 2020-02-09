@@ -1187,7 +1187,7 @@ describe('compat/chai', function () {
     expect(bangFn).to.change(obj, 'str');
   });
 
-  it('increase, decrease', function() {
+  it.skip('increase, decrease', function() {
     var obj = { value: 10 },
         incFn = function() { obj.value += 2 },
         decFn = function() { obj.value -= 3 },

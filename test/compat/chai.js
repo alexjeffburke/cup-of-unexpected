@@ -915,7 +915,7 @@ describe('compat/chai', function () {
 
     var badFn = function () { throw new Error('testing'); };
 
-    expect(badFn).to.throw(Error).with.property('message', 'testing');
+    expect(badFn).to.throw(Error).with.property('message', 'testing'); // TODO: used to be 'testing'
   });
 
   it('throw', function () {

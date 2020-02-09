@@ -65,6 +65,18 @@ describe('index', () => {
     });
   });
 
+  describe('.to.respondTo()', () => {
+    it('should throw with an informative message', () => {
+      unexpected(
+        () => {
+          expect(undefined).to.respondTo();
+        },
+        'to throw',
+        'The respondTo() assertion is not supported.'
+      );
+    });
+  });
+
   describe('.to.throw()', () => {
     it('should pass', () => {
       expect(() => {

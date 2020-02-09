@@ -1047,7 +1047,7 @@ describe('compat/chai', function () {
     }, "expected [Function] to not throw an error but 'CustomError: foo' was thrown");
   });
 
-  it('respondTo', function(){
+  it.skip('respondTo', function(){
     function Foo(){};
     Foo.prototype.bar = function(){};
     Foo.func = function() {};

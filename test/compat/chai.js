@@ -1080,7 +1080,7 @@ describe('compat/chai', function () {
 
     err(function(){
       expect(2).to.satisfy(matcher, 'blah');
-    }, "blah: expected 2 to satisfy [Function]");
+    }, 'blah: expected 2 to satisfy function (num) { return num === 1; }'); // "blah: expected 2 to satisfy [Function]"
   });
 
   it('closeTo', function(){

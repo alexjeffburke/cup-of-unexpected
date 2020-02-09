@@ -35,14 +35,8 @@ describe('cupOfUnexpected', () => {
   });
 
   describe('use()', () => {
-    it('should throw unsupported message', () => {
-      unexpected(
-        () => {
-          cupOfUnexpected.use();
-        },
-        'to throw',
-        'use() of plugins is not supported.'
-      );
+    it('should be a function', () => {
+      unexpected(cupOfUnexpected.use, 'to be a function');
     });
   });
 });

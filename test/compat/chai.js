@@ -13,6 +13,12 @@ function err(fn, msg) {
   }));
 }
 
+function errIgnoringMessage(fn, msg) {
+  unexpected(() => {
+    fn();
+  }, 'to throw');
+}
+
 describe('compat/chai', function () {
   /*
   it('chai.version', function() {
@@ -968,75 +974,75 @@ describe('compat/chai', function () {
     expect(badFn).to.throw(Error, /testing/);
     expect(badFn).to.throw(Error, 'testing');
 
-    err(function(){
+    errIgnoringMessage(function(){
       expect(goodFn).to.throw();
     }, "expected [Function] to throw an error");
 
-    err(function(){
+    errIgnoringMessage(function(){
       expect(goodFn).to.throw(ReferenceError);
     }, "expected [Function] to throw ReferenceError");
 
-    err(function(){
+    errIgnoringMessage(function(){
       expect(goodFn).to.throw(specificError);
     }, "expected [Function] to throw 'RangeError: boo'");
 
-    err(function(){
+    errIgnoringMessage(function(){
       expect(badFn).to.not.throw();
     }, "expected [Function] to not throw an error but 'Error: testing' was thrown");
 
-    err(function(){
+    errIgnoringMessage(function(){
       expect(badFn).to.throw(ReferenceError);
     }, "expected [Function] to throw 'ReferenceError' but 'Error: testing' was thrown");
 
-    err(function(){
+    errIgnoringMessage(function(){
       expect(badFn).to.throw(specificError);
     }, "expected [Function] to throw 'RangeError: boo' but 'Error: testing' was thrown");
 
-    err(function(){
+    errIgnoringMessage(function(){
       expect(badFn).to.not.throw(Error);
     }, "expected [Function] to not throw 'Error' but 'Error: testing' was thrown");
 
-    err(function(){
+    errIgnoringMessage(function(){
       expect(refErrFn).to.not.throw(ReferenceError);
     }, "expected [Function] to not throw 'ReferenceError' but 'ReferenceError: hello' was thrown");
 
-    err(function(){
+    errIgnoringMessage(function(){
       expect(badFn).to.throw(PoorlyConstructedError);
     }, "expected [Function] to throw 'PoorlyConstructedError' but 'Error: testing' was thrown");
 
-    err(function(){
+    errIgnoringMessage(function(){
       expect(ickyErrFn).to.not.throw(PoorlyConstructedError);
     }, /^(expected \[Function\] to not throw 'PoorlyConstructedError' but)(.*)(PoorlyConstructedError|\{ Object \()(.*)(was thrown)$/);
 
-    err(function(){
+    errIgnoringMessage(function(){
       expect(ickyErrFn).to.throw(ReferenceError);
     }, /^(expected \[Function\] to throw 'ReferenceError' but)(.*)(PoorlyConstructedError|\{ Object \()(.*)(was thrown)$/);
 
-    err(function(){
+    errIgnoringMessage(function(){
       expect(specificErrFn).to.throw(new ReferenceError('eek'));
     }, "expected [Function] to throw 'ReferenceError: eek' but 'RangeError: boo' was thrown");
 
-    err(function(){
+    errIgnoringMessage(function(){
       expect(specificErrFn).to.not.throw(specificError);
     }, "expected [Function] to not throw 'RangeError: boo'");
 
-    err(function (){
+    errIgnoringMessage(function (){
       expect(badFn).to.not.throw(/testing/);
     }, "expected [Function] to throw error not matching /testing/");
 
-    err(function () {
+    errIgnoringMessage(function () {
       expect(badFn).to.throw(/hello/);
     }, "expected [Function] to throw error matching /hello/ but got 'testing'");
 
-    err(function () {
+    errIgnoringMessage(function () {
       expect(badFn).to.throw(Error, /hello/, 'blah');
     }, "blah: expected [Function] to throw error matching /hello/ but got 'testing'");
 
-    err(function () {
+    errIgnoringMessage(function () {
       expect(badFn).to.throw(Error, 'hello', 'blah');
     }, "blah: expected [Function] to throw error including 'hello' but got 'testing'");
 
-    err(function () {
+    errIgnoringMessage(function () {
       (customErrFn).should.not.throw();
     }, "expected [Function] to not throw an error but 'CustomError: foo' was thrown");
   });

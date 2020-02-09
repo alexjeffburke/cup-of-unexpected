@@ -69,9 +69,7 @@ describe('index', () => {
     it('should pass', () => {
       expect(() => {
         throw new SyntaxError();
-      }).to.throw(e => {
-        expect(e).to.be.a(SyntaxError);
-      });
+      }).to.throw(SyntaxError);
     });
 
     it('should fail', () => {
@@ -79,12 +77,13 @@ describe('index', () => {
         () => {
           expect(() => {
             throw new Error();
-          }).to.throw(e => {
-            expect(e).to.be.a(SyntaxError);
-          });
+          }).to.throw(SyntaxError);
         },
         'to throw textual message',
-        'expected Error() to be a SyntaxError'
+        [
+          'expected () => { throw new Error(); } to throw a SyntaxError',
+          '  expected Error() to be a SyntaxError'
+        ].join('\n')
       );
     });
   });

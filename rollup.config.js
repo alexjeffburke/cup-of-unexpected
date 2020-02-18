@@ -5,12 +5,12 @@ const plugins = [commonjs(), nodeResolve()];
 
 module.exports = [
   {
-    input: 'build/lib/expectTheUnexpected.js',
+    input: 'build/lib/cupOfUnexpected.js',
     external: ['unexpected'],
     output: {
       file: 'index.js',
       name: 'expect',
-      exports: 'default',
+      exports: 'named',
       format: 'umd',
       sourcemap: true,
       strict: false,

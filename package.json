@@ -3,7 +3,7 @@
   "version": "3.0.0",
   "main": "lib/cupOfUnexpected.js",
   "scripts": {
-    "build": "mkdir -p build && buble -o build/lib lib",
+    "build": "mkdir -p build && buble --yes dangerousForOf -o build/lib lib",
     "bundle": "npm run build && rollup -c",
     "prepublishOnly": "npm run bundle",
     "test": "mocha",

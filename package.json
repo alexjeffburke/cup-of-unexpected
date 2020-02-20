@@ -1,6 +1,6 @@
 {
-  "name": "expect-the-unexpected",
-  "version": "3.0.0",
+  "name": "cup-of-unexpected",
+  "version": "0.0.0",
   "main": "lib/cupOfUnexpected.js",
   "scripts": {
     "build": "mkdir -p build && buble --yes dangerousForOf -o build/lib lib",

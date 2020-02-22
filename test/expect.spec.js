@@ -2,7 +2,7 @@ var unexpected = require('unexpected');
 
 var expect = require('../lib/cupOfUnexpected').expect;
 
-describe('cupOfUnexpected', () => {
+describe('expect()', () => {
   unexpected = unexpected.clone();
 
   unexpected.addAssertion(

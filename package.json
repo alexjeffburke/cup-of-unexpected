@@ -1,5 +1,17 @@
 {
   "name": "cup-of-unexpected",
+  "description": "chai expect facade for Unexpected",
+  "keywords": [
+    "assertion",
+    "unexpected",
+    "chai",
+    "expect"
+  ],
+  "author": "Alex J Burke <alex@alexjeffburke.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/alexjeffburke/cup-of-unexpected.git"
+  },
   "version": "0.0.0",
   "main": "lib/cupOfUnexpected.js",
   "scripts": {
@@ -10,16 +22,11 @@
     "lint": "eslint . && prettier --check '**/*.js'",
     "coverage": "nyc --reporter lcov --reporter text mocha"
   },
-  "author": "Alex J Burke <alex@alexjeffburke.com>",
   "files": [
     "cupOfUnexpected.js",
     "cupOfUnexpected.js.map",
     "lib"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/unexpectedjs/expect-the-unexpected.git"
-  },
   "license": "ISC",
   "dependencies": {
     "assertion-error": "^1.1.0",

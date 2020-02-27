@@ -2,8 +2,9 @@ language: node_js
 env:
   - TARGET=test
 node_js:
-  - '6'
   - '8'
+  - '10'
+  - '12'
 matrix:
   include:
     - name: Lint

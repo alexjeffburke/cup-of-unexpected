@@ -3,5 +3,5 @@
 
 # Build
 /build/
-/cupOfUnexpected.js
-/cupOfUnexpected.js.map
+/cupOfUnexpected.umd.js
+/cupOfUnexpected.umd.js.map

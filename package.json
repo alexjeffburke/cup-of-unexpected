@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git://github.com/alexjeffburke/cup-of-unexpected.git"
   },
-  "version": "0.0.0",
+  "version": "0.1.0",
   "main": "lib/cupOfUnexpected.js",
   "scripts": {
     "build": "mkdir -p build && buble --yes dangerousForOf -o build/lib lib",

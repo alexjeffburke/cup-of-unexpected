@@ -3,5 +3,5 @@ test/compat/*.js
 
 # Build
 build/
-index.js
-index.js.map
+cupOfUnexpected.umd.js
+cupOfUnexpected.umd.js.map

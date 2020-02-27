@@ -8,7 +8,7 @@ module.exports = [
     input: 'build/lib/cupOfUnexpected.js',
     external: ['unexpected'],
     output: {
-      file: 'index.js',
+      file: 'cupOfUnexpected.umd.js',
       name: 'expect',
       exports: 'named',
       format: 'umd',
